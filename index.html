@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>José Ignacio Pumagualli — Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0D0F12;
+      --surface:   #13161B;
+      --border:    #1E2330;
+      --accent:    #3B82F6;
+      --accent2:   #6366F1;
+      --text:      #E8EAF0;
+      --muted:     #6B7280;
+      --tag-bg:    #1A1F2E;
+      --tag-text:  #93C5FD;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(13,15,18,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: .875rem;
+      font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 1100px; margin: 0 auto;
+      gap: 4rem;
+    }
+    .hero-text { flex: 1; }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem; color: var(--accent);
+      letter-spacing: .15em; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero-eyebrow span { opacity: .5; margin: 0 .5rem; }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 1.05rem; color: var(--muted);
+      max-width: 520px; margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+    .btn-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.5rem; border-radius: 8px;
+      font-size: .9rem; font-weight: 500;
+      text-decoration: none; transition: all .2s; cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+    }
+    .btn-primary:hover { background: #2563EB; transform: translateY(-1px); }
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-photo {
+      flex-shrink: 0;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      object-fit: cover;
+      filter: grayscale(20%);
+      box-shadow: 0 0 60px rgba(59,130,246,.15);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; color: var(--accent);
+      letter-spacing: .15em; text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 3rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); }
+    .skill-card h3 {
+      font-size: .95rem; font-weight: 600;
+      margin-bottom: .75rem; color: var(--text);
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .tag {
+      background: var(--tag-bg); color: var(--tag-text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; padding: .25rem .65rem;
+      border-radius: 4px; letter-spacing: .03em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex; flex-direction: column; gap: 1rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .project-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .project-icon { font-size: 1.8rem; }
+    .project-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; padding: .2rem .6rem;
+      border-radius: 20px; font-weight: 500;
+    }
+    .badge-real { background: rgba(34,197,94,.1); color: #4ADE80; border: 1px solid rgba(34,197,94,.2); }
+    .badge-academic { background: rgba(99,102,241,.1); color: #A5B4FC; border: 1px solid rgba(99,102,241,.2); }
+    .project-card h3 { font-size: 1.05rem; font-weight: 600; }
+    .project-card p { font-size: .9rem; color: var(--muted); line-height: 1.7; flex: 1; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--accent); font-size: .85rem; font-weight: 500;
+      text-decoration: none; margin-top: auto;
+      transition: gap .2s;
+    }
+    .project-link:hover { gap: .7rem; }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; gap: .85rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color .2s;
+    }
+    .contact-card:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-card .ci { font-size: 1.3rem; }
+    .contact-card span { font-size: .875rem; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .8rem;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media (max-width: 700px) {
+      .hero { flex-direction: column-reverse; gap: 2rem; padding-top: 6rem; }
+      .hero-photo { width: 140px; height: 140px; }
+      nav { padding: .75rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">jip.dev</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Available for freelance <span>·</span> Quito, Ecuador</div>
+      <h1>José Ignacio<br>Pumagualli<br><em>Software Dev</em></h1>
+      <p class="hero-desc">
+        I build <strong>real software that solves real problems</strong> — from school attendance systems with facial recognition integration to Java desktop apps and web backends. Currently pursuing a Software Engineering degree at <strong>UDLA</strong> while taking on client projects.
+      </p>
+      <div class="btn-row">
+        <a href="#projects" class="btn btn-primary">View my work →</a>
+        <a href="https://github.com/JoseIgnacio-Puma08" target="_blank" class="btn btn-ghost">GitHub</a>
+        <a href="#contact" class="btn btn-ghost">Hire me</a>
+      </div>
+    </div>
+    <img
+      class="hero-photo"
+      src="photo.jpg"
+      alt="José Ignacio Pumagualli"
+      onerror="this.style.display='none'"
+    />
+  </div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">// what I work with</div>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h3>Backend & Databases</h3>
+        <div class="tags">
+          <span class="tag">PHP</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Python</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Java & OOP</h3>
+        <div class="tags">
+          <span class="tag">Java SE</span>
+          <span class="tag">Swing GUI</span>
+          <span class="tag">JUnit</span>
+          <span class="tag">OOP / SOLID</span>
+          <span class="tag">IntelliJ IDEA</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Web Development</h3>
+        <div class="tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP MVC</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Tools & Infra</h3>
+        <div class="tags">
+          <span class="tag">Git / GitHub</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux (RHEL)</span>
+          <span class="tag">VMware</span>
+          <span class="tag">Windows Server</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <div class="tags">
+          <span class="tag">Spanish (native)</span>
+          <span class="tag">English (B2–C1)</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3>Methodologies</h3>
+        <div class="tags">
+          <span class="tag">UML / Use Cases</span>
+          <span class="tag">Requirements Eng.</span>
+          <span class="tag">BPMN</span>
+          <span class="tag">Agile basics</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">// things I've built</div>
+    <h2>Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🎓</div>
+          <span class="project-badge badge-real">Client Work</span>
+        </div>
+        <h3>EduControl Express</h3>
+        <p>School attendance management system for a private institution in Quito. Integrates with Hikvision facial recognition cameras via CSV export from iVMS-4200. PHP/MySQL web panel with monthly navigation, report export, and automated sync scripts in Python.</p>
+        <div class="tags" style="margin-top:.25rem;">
+          <span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Python</span><span class="tag">Hikvision API</span>
+        </div>
+        <a class="project-link" href="https://github.com/JoseIgnacio-Puma08" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">🏋️</div>
+          <span class="project-badge badge-academic">Academic</span>
+        </div>
+        <h3>FitSync Pro</h3>
+        <p>Java desktop application for gym management. Features BMI calculation, health contraindication validation, physical condition assessment module, and a full Swing GUI built with IntelliJ GUI Designer. Unit-tested with JUnit.</p>
+        <div class="tags" style="margin-top:.25rem;">
+          <span class="tag">Java SE</span><span class="tag">Swing</span><span class="tag">JUnit</span><span class="tag">OOP</span>
+        </div>
+        <a class="project-link" href="https://github.com/JoseIgnacio-Puma08" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">⚔️</div>
+          <span class="project-badge badge-academic">Academic</span>
+        </div>
+        <h3>Knights Mission Manager</h3>
+        <p>Mission management system with a full Java Swing GUI. Implements ArrayList-based data structures, OOP inheritance hierarchy, and a multi-panel interface. Built collaboratively with version control on GitHub.</p>
+        <div class="tags" style="margin-top:.25rem;">
+          <span class="tag">Java SE</span><span class="tag">Swing GUI</span><span class="tag">ArrayList</span><span class="tag">OOP</span>
+        </div>
+        <a class="project-link" href="https://github.com/JoseIgnacio-Puma08" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-icon">💎</div>
+          <span class="project-badge badge-academic">Academic</span>
+        </div>
+        <h3>Digital Asset Management System</h3>
+        <p>Asset management platform built in Java. Features an inheritance-based class hierarchy, JUnit test suite, and ArrayList-based data persistence. Designed around SOLID principles and clean OOP architecture.</p>
+        <div class="tags" style="margin-top:.25rem;">
+          <span class="tag">Java SE</span><span class="tag">JUnit</span><span class="tag">OOP / SOLID</span>
+        </div>
+        <a class="project-link" href="https://github.com/JoseIgnacio-Puma08" target="_blank">View on GitHub →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">// let's work together</div>
+    <h2>Get in Touch</h2>
+    <p style="color:var(--muted); margin-bottom:2rem; max-width:480px;">
+      Available for freelance projects — web apps, desktop software, database systems, and automation scripts. Response within 24 hours.
+    </p>
+    <div class="contact-grid">
+      <a class="contact-card" href="https://github.com/JoseIgnacio-Puma08" target="_blank">
+        <span class="ci">⌥</span><span>GitHub</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/jose-ignacio-pumagualli" target="_blank">
+        <span class="ci">in</span><span>LinkedIn</span>
+      </a>
+      <a class="contact-card" href="mailto:pumaguallipro@gmail.com">
+        <span class="ci">✉</span><span>Email me</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 José Ignacio Pumagualli Silva &nbsp;·&nbsp; Built with HTML/CSS &nbsp;·&nbsp; Quito, Ecuador
+  </footer>
+
+</body>
+</html>
